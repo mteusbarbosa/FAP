@@ -304,4 +304,3 @@ else: # jogadorA == "papel"
     else:
         print("Empate")
 ```
-
