@@ -46,26 +46,33 @@ Teste o programa com diferentes entradas para garantir que os resultados estão 
 
 import math
 
+# Difinição da mensagem de erro padrão
 mensagem_erro = "Entrada inválida. Por favor, insira números válidos."
 
+# Função para receber os valores do armazém
 def receber_valores_armazem(): 
+    # Permanece no loop até que o usuário insira um valor válido
     while True:
+        # Tenta receber o valor do comprimento, largura e altura do armazém
         try:
-            comprimento = float(input("Digite o comprimento do armazém em metros: "))
-            largura = float(input("Digite a largura do armazém em metros: "))
-            altura = float(input("Digite a altura do armazém em metros: "))
+            comprimento = float(input("Digite o comprimento do armazém em centímetros: "))
+            largura = float(input("Digite a largura do armazém em centímetros: "))
+            altura = float(input("Digite a altura do armazém em centímetros: "))
+            # Se o usuário inseriu um valor válido, sai do loop
             if comprimento > 0 and largura > 0 and altura > 0:
                 return comprimento, largura, altura
             else:
                 print("As dimensões devem ser maiores que zero. Tente novamente.")
+        # Se o usuário inseriu um valor inválido, exibe a mensagem de erro
         except ValueError:
             print(mensagem_erro)
-            
+
+# Função para receber o diâmetro da bola 
 def valor_diametro(bolaescolhida):
     if bolaescolhida == 7:
         while True:
             try:
-                diametro_bola = float(input("Qual o diâmetro da bola em centímetros?"))
+                diametro_bola = float(input("Qual o diâmetro da bola em centímetros? "))
 
                 if diametro_bola > 0 and diametro_bola < 100:
                     return diametro_bola
@@ -73,7 +80,8 @@ def valor_diametro(bolaescolhida):
                     print("Valor não suportado. Tente novamente.")
             except ValueError:
                 print(mensagem_erro)
-        
+
+    # Retorno das bolas pré-definidas
     match bolaescolhida:
         case 1:
             return 24
@@ -87,11 +95,12 @@ def valor_diametro(bolaescolhida):
             return 19
         case 6:
             return 20
-            
+
+# Função para selecionar a bola
 def diametro_bola():
     while True:
         try:
-            escolha = int(input("Selecione uma das bolas listadas:\n1 - Bola de Basquete Adulto (24 cm)\n2 - Bola de Basquete Infantil (22 cm)\n3 - Bola de Futebol Oficial (22 cm)\n4 - Bola de Vôlei (21 cm)\n5 - Bola de Handball (19 cm)\n6 - Bola de Futebol de Salão (20 cm)\n7 - Outro valor\n"))    
+            escolha = int(input("1 - Bola de Basquete Adulto\n2 - Bola de Basquete Infantil\n3 - Bola de Futebol Oficial\n4 - Bola de Vôlei\n5 - Bola de Handball\n6 - Bola de Futebol de Salão\n7 - Outro valor\nSelecione uma das bolas listadas: "))    
             if escolha > 0 and escolha < 8 :
                 diametro = valor_diametro(escolha)
                 return diametro
@@ -99,26 +108,28 @@ def diametro_bola():
                 print("As dimensões devem ser maiores que zero. Tente novamente.")
         except ValueError:
             print(mensagem_erro)
-            
+
+
+# Função para calcular o volume do armazém
 def calcular_volumes(altura, comprimento, largura, diametro):
     raio = diametro/2
     volume_armazem = altura * comprimento * largura
-    volume_bola = (4/3) * math.pi * math.pow(raio, 3)
+    volume_bola = (4/3) * math.pi * raio**3
     return volume_armazem, volume_bola
 
+# Função para calcular o número de bolas que cabem no armazém
 def calcular_numero_bolas(volume_armazem, volume_bola):
-    bola_metro_cubico = volume_bola/1000000
-    return volume_armazem / bola_metro_cubico
-    
-        
+    return volume_armazem // volume_bola
 
+# Main
 comprimento, largura, altura = receber_valores_armazem()
 diametro = diametro_bola()
 volumeArmazem, volumeBola = calcular_volumes(altura, comprimento, largura, diametro)
 numero_bolas = calcular_numero_bolas(volumeArmazem, volumeBola)
 
-print("Comprimento: %.2f metros\nLargura: %.2f metros\nAltura: %.2f metros" % (comprimento, largura, altura))
-print("Diametro: %.0f", diametro)
-print("Volume armazem: %.2f metroc cúbicos\nVolume bola: %.02f centímetros cúbicos" % (volumeArmazem, volumeBola))
+# Prints finais / debug
 
-print("Quantidade de bolas que cabem no armazém: %.0f" % (numero_bolas))
+#print("Comprimento: %.2f cm\nLargura: %.2f cm\nAltura: %.2f cm" % (comprimento, largura, altura))
+# print("Diametro da bola: ", diametro)
+#print("Volume armazem: %.2f cm³\nVolume bola: %.02f cm³" % (volumeArmazem, volumeBola))
+print("\nQuantidade de bolas que cabem no armazém: %.0f bolas" % (numero_bolas))
