@@ -98,7 +98,7 @@ def diametro_bola():
             else:
                 print("As dimensões devem ser maiores que zero. Tente novamente.")
         except ValueError:
-            print("Entrada inválida. Por favor, insira números válidos.")
+            print(mensagem_erro)
             
 def calcular_volumes(altura, comprimento, largura, diametro):
     raio = diametro/2
