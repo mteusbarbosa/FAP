@@ -27,6 +27,6 @@ while True:
       )
       break
     else:
-      print("Número inválida. Escolha 1 ou 2.")
+      print("Número inválido. Escolha 1 ou 2.")
   except ValueError:
     print("Valor inválido. Informe um número válido.")
