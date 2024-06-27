@@ -21,14 +21,27 @@ Dicas:
     Use a estrutura for para iterar sobre a lista de alunos e exibir seus dados. 
 """
 
+""" 
+Desafios (Opcionais):
+Implemente funcionalidades adicionais, como:
+    - Atualizar Dados: Editar as informações de um aluno existente.
+    - Remover Aluno: Excluir um aluno da lista.
+    - Pesquisar Aluno: Encontrar alunos por nome, matrícula ou curso.
+    - Calcular Média: Calcular a média das notas de um aluno.
+    - Salvar e Carregar Dados: Salvar a lista de alunos em um arquivo e carregar os dados de um arquivo.
+"""
+
+import json
+
 alunos = []
 
+
 def trilha():
-    print("------------------------------------------------")
+    print("-------------------------------------------------")
 
 def cadastrar_aluno():
     novo_aluno = {} # Cria um dicionário vazio para o novo aluno
-    print("\n----------------------------")
+    trilha()
     novo_aluno["nome"] = input("Nome do aluno: ")
     novo_aluno["curso"] = input("Curso: ")
     try:
@@ -40,6 +53,8 @@ def cadastrar_aluno():
     alunos.append(novo_aluno)
 
 def listar_alunos():
+    print(alunos)
+    print(type(alunos))
     if not alunos:
         trilha()
         print("Nenhum aluno cadastrado.")
@@ -48,16 +63,33 @@ def listar_alunos():
         for aluno in alunos:
             trilha()
             print(f"Nome: {aluno['nome']}\nCurso: {aluno['curso']}\nMatrícula: {aluno['matricula']}")
+            
+def carregar_dados_arquivo():
+    global alunos 
+    with open("Exercícios\\Módulo 1\\arquivo.txt", "r") as arquivo_json:
+        alunos = json.load(arquivo_json)
+        
+    print(alunos)
+    print(type(alunos))
+
+def salvar_alunos_arquivo():
+    with open("Exercícios\\Módulo 1\\arquivo.txt", "w") as arquivo_json:
+        json.dump(alunos, arquivo_json)
 
 while True:
     trilha()
-    print("[1] Cadastrar novo aluno")
-    print("[2] Listar alunos cadastrados")
-    print("[0] Listar alunos cadastrados")
+    print("[1] Cadastrar novo aluno                        |")
+    print("[2] Listar alunos cadastrados                   |")
+    print("[3] Atualizar dados de um aluno                 |")
+    print("[4] Pesquisar por um aluno                      |")
+    print("[5] Calcular média                              |")
+    print("[6] Carregar dados                              |")
+    print("[7] Salvar dados                                |")
+    print("[0] Listar alunos cadastrados                   |")
     try: 
         opcao = int(input("Escolha sua opção: "))
         
-        if opcao < 0 or opcao > 2:
+        if opcao < 0 or opcao > 7:
             trilha()
             print("Opção inválida!")
     except ValueError:
@@ -69,6 +101,12 @@ while True:
     
     if opcao == 2:
         listar_alunos()
+    
+    if opcao == 6:
+        carregar_dados_arquivo()
+       
+    if opcao == 7:
+        salvar_alunos_arquivo()
        
     try: 
         if opcao == 0:
