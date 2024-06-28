@@ -33,8 +33,7 @@ Implemente funcionalidades adicionais, como:
 
 import json
 
-alunos = []
-
+alunos = {}
 
 def trilha():
     print("-------------------------------------------------")
@@ -45,32 +44,28 @@ def cadastrar_aluno():
     novo_aluno["nome"] = input("Nome do aluno: ")
     novo_aluno["curso"] = input("Curso: ")
     try:
-        novo_aluno["matricula"] = int(input("Matrícula: ")) # Convertendo para inteiro
+        matricula = int(input("Matrícula: ")) # Convertendo para inteiro
     except ValueError:
-        print("Valor inválido. Matriculas devem ser apenas números")
+        print("Valor inválido. Matrículas devem ser apenas números")
         return
 
-    alunos.append(novo_aluno)
+    novo_aluno["matricula"] = matricula
+    alunos[matricula] = novo_aluno
 
 def listar_alunos():
-    print(alunos)
-    print(type(alunos))
     if not alunos:
         trilha()
         print("Nenhum aluno cadastrado.")
     else:
         print("Lista de alunos cadastrados:")
-        for aluno in alunos:
+        for matricula, aluno in alunos.items():
             trilha()
             print(f"Nome: {aluno['nome']}\nCurso: {aluno['curso']}\nMatrícula: {aluno['matricula']}")
             
 def carregar_dados_arquivo():
-    global alunos 
+    global alunos
     with open("Exercícios\\Módulo 1\\arquivo.txt", "r") as arquivo_json:
         alunos = json.load(arquivo_json)
-        
-    print(alunos)
-    print(type(alunos))
 
 def salvar_alunos_arquivo():
     with open("Exercícios\\Módulo 1\\arquivo.txt", "w") as arquivo_json:
@@ -85,7 +80,7 @@ while True:
     print("[5] Calcular média                              |")
     print("[6] Carregar dados                              |")
     print("[7] Salvar dados                                |")
-    print("[0] Listar alunos cadastrados                   |")
+    print("[0] Sair                                        |")
     try: 
         opcao = int(input("Escolha sua opção: "))
         
