@@ -44,11 +44,17 @@ def cadastrar_aluno():
     novo_aluno["nome"] = input("Nome do aluno: ")
     novo_aluno["curso"] = input("Curso: ")
     try:
-        matricula = int(input("Matrícula: ")) # Convertendo para inteiro
+        nova_matricula = int(input("Matrícula: ")) # Convertendo para inteiro
     except ValueError:
         print("Valor inválido. Matrículas devem ser apenas números")
         return
 
+    for matricula, aluno in alunos.items():
+        if aluno['matricula'] == nova_matricula:
+            trilha()
+            print("Matricula já está cadastrada!")
+            return
+    
     novo_aluno["matricula"] = matricula
     alunos[matricula] = novo_aluno
 
