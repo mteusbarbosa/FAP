@@ -1,0 +1,1 @@
+""" Sistema de Votação: Crie um programa que simule uma votação com 4 candidatos. O programa deve contar os votos de cada candidato, votos nulos e em branco. Ao final, deve mostrar o total de votos para cada candidato, o total de votos nulos e em branco, e as respectivas porcentagens sobre o total de votos. """
