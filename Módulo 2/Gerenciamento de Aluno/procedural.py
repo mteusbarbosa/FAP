@@ -23,6 +23,19 @@ Para ambos os exercícios:
 Bônus: Implemente a funcionalidade de salvar e carregar os dados dos alunos 
 em um arquivo, tanto na versão procedural quanto na orientada a objetos.
 '''
+#Importação da biblioteca json
+import json
+
+# Função para carregar os dados dos alunos do arquivo JSON
+def carregar_dados_arquivo():
+  global alunos
+  with open("dados_alunos.json", "r") as arquivo_json:
+    alunos = json.load(arquivo_json)
+
+# Função para salvar os dados dos alunos no arquivo JSON
+def salvar_alunos_arquivo():
+  with open("dados_alunos.json", "w") as arquivo_json:
+    json.dump(alunos, arquivo_json)
 
 while True:
   print("[1] Cadastrar um novo aluno")
