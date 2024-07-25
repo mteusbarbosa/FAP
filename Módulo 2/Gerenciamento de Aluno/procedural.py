@@ -28,6 +28,8 @@ import os
 import json
 from tabulate import tabulate
 
+alunos = {}
+
 def trilha():
   terminal_size = os.get_terminal_size()
   print("-" * terminal_size.columns)
@@ -48,6 +50,25 @@ def cadastrar_nota(nome_nota):
     except ValueError:
       print("Valor inválido. A nota deve ser um número real.")
       continue
+    
+#Função para atualizar nota do aluno
+
+def atualizar_nota(nome_nota, nota_atual):
+  while True:
+    try:
+      nova_nota = input(f"Nota do {nome_nota} atual ({nota_atual}): ")
+      if nova_nota:
+        nova_nota = float(nova_nota)
+        if nova_nota < 0 or nova_nota > 10:
+          print("A nota deve estar entre 0 e 10.")
+          continue
+        return nova_nota
+      else:
+        return nota_atual
+    except ValueError:
+      print("Valor inválido. A nota deve ser um número real.")
+      continue
+
 
 # Função para cadastrar um novo aluno
 def cadastrar_novo_aluno():
@@ -98,6 +119,42 @@ def listar_alunos_cadastrados():
       tabulate(data,
                headers=['Nome', 'Curso', 'Matrícula'],
                tablefmt='simple_grid'))
+  
+def editar_aluno_existente():
+  trilha()
+  while True:
+    try:
+      # Convertendo para inteiro
+      matricula = int(input("Matrícula do aluno a ser editado: "))
+    except ValueError:
+      print("Valor inválido. Matrículas devem ser apenas números")
+      continue
+
+    if matricula in alunos:
+      aluno = alunos[matricula]
+      print(f"Editando informações do aluno: {aluno['nome']}")
+
+      # Editar nome
+      novo_nome = input(f"Nome atual ({aluno['nome']}): ")
+      if novo_nome:
+        aluno['nome'] = novo_nome
+
+      # Editar curso
+      novo_curso = input(f"Curso atual ({aluno['curso']}): ")
+      if novo_curso:
+        aluno['curso'] = novo_curso
+
+      # Editar notas
+      aluno['nota1'] = atualizar_nota("1º Trimestre", aluno['nota1'])
+      aluno['nota2'] = atualizar_nota("2º Trimestre", aluno['nota2'])
+      aluno['nota3'] = atualizar_nota("3º Trimestre", aluno['nota3'])
+
+      # Atualiza as informações do aluno
+      alunos[matricula] = aluno
+      print(f"Informações do aluno {aluno['nome']} atualizadas com sucesso!")
+      break
+    else:
+      print("Matrícula não encontrada.")
 
 
 
@@ -134,11 +191,11 @@ while True:
       continue
   
     if opcao == 2:
-      #listar_alunos_cadastrados()
+      listar_alunos_cadastrados()
       continue
   
     if opcao == 3:
-      #editar_aluno_existente()
+      editar_aluno_existente()
       continue
   
     if opcao == 4:
