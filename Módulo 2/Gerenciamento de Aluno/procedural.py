@@ -30,6 +30,10 @@ from tabulate import tabulate
 
 alunos = {}
 
+#Função para impressão de mensagem de erro
+def mensagem_erro():
+  print("Valor inválido. Matrículas devem ser apenas números")
+
 #Função para exibir separadores
 def trilha():
   terminal_size = os.get_terminal_size()
@@ -72,7 +76,7 @@ def cadastrar_novo_aluno():
       # Convertendo para inteiro
       nova_matricula = int(input("Matrícula: "))
     except ValueError:
-      print("Valor inválido. Matrículas devem ser apenas números")
+      mensagem_erro()
       continue
 
     if nova_matricula in alunos:
@@ -114,7 +118,7 @@ def editar_aluno_existente():
       # Convertendo para inteiro
       matricula = int(input("Matrícula do aluno a ser editado: "))
     except ValueError:
-      print("Valor inválido. Matrículas devem ser apenas números")
+      mensagem_erro()
       continue
 
     if matricula in alunos:
@@ -161,7 +165,7 @@ def excluir_aluno():
         print("Matrícula não encontrada.")
         break
     except ValueError:
-      print("Valor inválido. Matrículas devem ser apenas números")
+      mensagem_erro()
       continue
 
 #Função para exibir média dos alunos
