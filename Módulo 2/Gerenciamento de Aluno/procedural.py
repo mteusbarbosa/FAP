@@ -24,7 +24,58 @@ Bônus: Implemente a funcionalidade de salvar e carregar os dados dos alunos
 em um arquivo, tanto na versão procedural quanto na orientada a objetos.
 '''
 #Importação da biblioteca json
+import os
 import json
+
+def trilha():
+  terminal_size = os.get_terminal_size()
+  print("-" * terminal_size.columns)
+
+# Função para cadastrar as notas de um aluno
+def cadastrar_nota(nome_nota):
+  while True:
+    # Testa o input de usuário e apenas valida caso seja um número
+    try:
+      nota = float(input(f"Nota do {nome_nota}: "))
+
+      # Validação da nota
+      if nota < 0 or nota > 10:
+        print("A nota deve estar entre 0 e 10.")
+        continue
+
+      return nota 
+    except ValueError:
+      print("Valor inválido. A nota deve ser um número real.")
+      continue
+
+# Função para cadastrar um novo aluno
+def cadastrar_novo_aluno():
+  # Cria um dicionário vazio para o novo aluno
+  novo_aluno = {}
+  trilha()
+  novo_aluno["nome"] = input("Nome do aluno: ")
+  novo_aluno["curso"] = input("Curso: ")
+
+  # Testa o input de usuário e apenas valida caso seja um número
+  while True:
+    try:
+      # Convertendo para inteiro
+      nova_matricula = int(input("Matrícula: "))
+    except ValueError:
+      print("Valor inválido. Matrículas devem ser apenas números")
+      continue
+
+    if nova_matricula in alunos:
+      print("Matrícula já está cadastrada!")
+    else:
+      novo_aluno["matricula"] = nova_matricula
+      break
+
+  novo_aluno["nota1"] = cadastrar_nota("1º Trimestre")
+  novo_aluno["nota2"] = cadastrar_nota("2º Trimestre")
+  novo_aluno["nota3"] = cadastrar_nota("3º Trimestre")
+  alunos[nova_matricula] = novo_aluno
+
 
 # Função para carregar os dados dos alunos do arquivo JSON
 def carregar_dados_arquivo():
@@ -55,7 +106,7 @@ while True:
       continue
 
     if opcao == 1:
-      #cadastrar_novo_aluno()
+      cadastrar_novo_aluno()
       continue
   
     if opcao == 2:
