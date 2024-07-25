@@ -155,6 +155,28 @@ def editar_aluno_existente():
       break
     else:
       print("Matrícula não encontrada.")
+      
+# Excluir aluno
+
+def excluir_aluno():
+  trilha()
+  while True:
+    try:
+      # Convertendo para inteiro
+      matricula = int(input("Matrícula do aluno a ser excluído: "))
+
+      # Buscando o aluno no dicionário
+      if matricula in alunos:
+        nome_aluno = alunos[matricula]["nome"]
+        del alunos[matricula]
+        print(f"Aluno {nome_aluno} excluído com sucesso!")
+        break
+      else:
+        print("Matrícula não encontrada.")
+        break
+    except ValueError:
+      print("Valor inválido. Matrículas devem ser apenas números")
+      continue
 
 
 
