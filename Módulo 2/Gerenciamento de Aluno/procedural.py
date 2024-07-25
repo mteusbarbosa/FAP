@@ -26,6 +26,7 @@ em um arquivo, tanto na versão procedural quanto na orientada a objetos.
 #Importação da biblioteca json
 import os
 import json
+from tabulate import tabulate
 
 def trilha():
   terminal_size = os.get_terminal_size()
@@ -75,6 +76,29 @@ def cadastrar_novo_aluno():
   novo_aluno["nota2"] = cadastrar_nota("2º Trimestre")
   novo_aluno["nota3"] = cadastrar_nota("3º Trimestre")
   alunos[nova_matricula] = novo_aluno
+
+# Função para Listar alunos
+
+def listar_alunos_cadastrados():
+  # Verifica se há alunos cadastrados
+  if not alunos:
+    trilha()
+    print("Não há alunos cadastrados.")
+    return
+
+  # Cria uma lista de listas com os dados dos alunos
+  data = [[
+      aluno['nome'],
+      aluno['curso'],
+      matricula,
+  ] for matricula, aluno in alunos.items()]
+   # Imprime a tabela
+  trilha()
+  print(
+      tabulate(data,
+               headers=['Nome', 'Curso', 'Matrícula'],
+               tablefmt='simple_grid'))
+
 
 
 # Função para carregar os dados dos alunos do arquivo JSON
