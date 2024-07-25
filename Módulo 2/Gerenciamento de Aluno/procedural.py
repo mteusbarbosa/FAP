@@ -30,44 +30,32 @@ from tabulate import tabulate
 
 alunos = {}
 
+#Função para exibir separadores
 def trilha():
   terminal_size = os.get_terminal_size()
   print("-" * terminal_size.columns)
 
-# Função para cadastrar as notas de um aluno
-def cadastrar_nota(nome_nota):
-  while True:
-    # Testa o input de usuário e apenas valida caso seja um número
-    try:
-      nota = float(input(f"Nota do {nome_nota}: "))
+# Função para cadastrar ou editar nota dos alunos
+def obter_nota(nome_nota, nota_atual=None):
+    while True:
+        try:
+            if nota_atual is not None:
+                entrada = input(f"Nota do {nome_nota} atual ({nota_atual}): ")
+                if entrada:
+                    nota = float(entrada)
+                else:
+                    return nota_atual
+            else:
+                nota = float(input(f"Nota do {nome_nota}: "))
 
-      # Validação da nota
-      if nota < 0 or nota > 10:
-        print("A nota deve estar entre 0 e 10.")
-        continue
+            if nota < 0 or nota > 10:
+                print("A nota deve estar entre 0 e 10.")
+                continue
 
-      return nota 
-    except ValueError:
-      print("Valor inválido. A nota deve ser um número real.")
-      continue
-    
-#Função para atualizar nota do aluno
-
-def atualizar_nota(nome_nota, nota_atual):
-  while True:
-    try:
-      nova_nota = input(f"Nota do {nome_nota} atual ({nota_atual}): ")
-      if nova_nota:
-        nova_nota = float(nova_nota)
-        if nova_nota < 0 or nova_nota > 10:
-          print("A nota deve estar entre 0 e 10.")
-          continue
-        return nova_nota
-      else:
-        return nota_atual
-    except ValueError:
-      print("Valor inválido. A nota deve ser um número real.")
-      continue
+            return nota
+        except ValueError:
+            print("Valor inválido. A nota deve ser um número real.")
+            continue
 
 
 # Função para cadastrar um novo aluno
@@ -93,13 +81,12 @@ def cadastrar_novo_aluno():
       novo_aluno["matricula"] = nova_matricula
       break
 
-  novo_aluno["nota1"] = cadastrar_nota("1º Trimestre")
-  novo_aluno["nota2"] = cadastrar_nota("2º Trimestre")
-  novo_aluno["nota3"] = cadastrar_nota("3º Trimestre")
+  novo_aluno["nota1"] = obter_nota("1º Trimestre")
+  novo_aluno["nota2"] = obter_nota("2º Trimestre")
+  novo_aluno["nota3"] = obter_nota("3º Trimestre")
   alunos[nova_matricula] = novo_aluno
 
 # Função para Listar alunos
-
 def listar_alunos_cadastrados():
   # Verifica se há alunos cadastrados
   if not alunos:
@@ -145,9 +132,9 @@ def editar_aluno_existente():
         aluno['curso'] = novo_curso
 
       # Editar notas
-      aluno['nota1'] = atualizar_nota("1º Trimestre", aluno['nota1'])
-      aluno['nota2'] = atualizar_nota("2º Trimestre", aluno['nota2'])
-      aluno['nota3'] = atualizar_nota("3º Trimestre", aluno['nota3'])
+      aluno['nota1'] = obter_nota("1º Trimestre", aluno['nota1'])
+      aluno['nota2'] = obter_nota("2º Trimestre", aluno['nota2'])
+      aluno['nota3'] = obter_nota("3º Trimestre", aluno['nota3'])
 
       # Atualiza as informações do aluno
       alunos[matricula] = aluno
@@ -157,7 +144,6 @@ def editar_aluno_existente():
       print("Matrícula não encontrada.")
       
 # Excluir aluno
-
 def excluir_aluno():
   trilha()
   while True:
@@ -179,7 +165,6 @@ def excluir_aluno():
       continue
 
 #Função para exibir média dos alunos
-
 def exibir_media_alunos():
   # Verifica se há alunos cadastrados
   if not alunos:
@@ -204,20 +189,23 @@ def exibir_media_alunos():
                ],
                tablefmt='simple_grid'))
 
-
-
 # Função para carregar os dados dos alunos do arquivo JSON
 def carregar_dados_arquivo():
   global alunos
   with open("dados_alunos.json", "r") as arquivo_json:
     alunos = json.load(arquivo_json)
+  trilha()
+  print("Dados carregados com sucesso.")
 
 # Função para salvar os dados dos alunos no arquivo JSON
 def salvar_alunos_arquivo():
   with open("dados_alunos.json", "w") as arquivo_json:
     json.dump(alunos, arquivo_json)
+  trilha()
+  print("Dados dos alunos salvos com sucesso.")
 
 while True:
+  trilha()
   print("[1] Cadastrar um novo aluno")
   print("[2] Listar todos os alunos cadastrados")
   print("[3] Editar informações de um aluno existente")
@@ -247,19 +235,19 @@ while True:
       continue
   
     if opcao == 4:
-      #excluir_aluno()
+      excluir_aluno()
       continue
   
     if opcao == 5:
-      #exibir_media_alunos()
+      exibir_media_alunos()
       continue
   
     if opcao == 6:
-      #carregar_dados_arquivo()
+      carregar_dados_arquivo()
       continue
 
     if opcao == 7:
-      #salvar_alunos_arquivo()
+      salvar_alunos_arquivo()
       continue
 
     if opcao == 0:
