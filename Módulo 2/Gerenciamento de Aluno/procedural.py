@@ -178,6 +178,32 @@ def excluir_aluno():
       print("Valor inválido. Matrículas devem ser apenas números")
       continue
 
+#Função para exibir média dos alunos
+
+def exibir_media_alunos():
+  # Verifica se há alunos cadastrados
+  if not alunos:
+    trilha()
+    print("Não há alunos cadastrados.")
+    return
+
+  # Cria uma lista de listas com os dados dos alunos
+  data = [[
+      aluno['nome'], aluno['curso'], matricula, aluno['nota1'], aluno['nota2'],
+      aluno['nota3'], "{:.1f}".format(
+          (aluno['nota1'] + aluno['nota2'] + aluno['nota3']) / 3)
+  ] for matricula, aluno in alunos.items()]
+
+  # Imprime a tabela
+  trilha()
+  print(
+      tabulate(data,
+               headers=[
+                   'Nome', 'Curso', 'Matrícula', 'Nota 1', 'Nota 2', 'Nota 3',
+                   'Média'
+               ],
+               tablefmt='simple_grid'))
+
 
 
 # Função para carregar os dados dos alunos do arquivo JSON
