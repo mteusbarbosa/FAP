@@ -186,25 +186,30 @@ class GerenciadorAlunos:
                      ],
                      tablefmt='simple_grid'))
 
+    # Método para carregr dados do arquivo JSON
     def carregar_dados_arquivo(self):
         with open("dados_alunos.json", "r") as arquivo_json:
-            alunos_dict = json.load(arquivo_json)
-        for matricula, dados in alunos_dict.items():
+            alunos_dicionario = json.load(arquivo_json)
+            
+        # Para cada chave do json (matricula) e seus dados dentro, 
+        # cria um Aluno (classe) passando todos os dados (desempacotamento)
+        for matricula, dados in alunos_dicionario.items():
             self.alunos[int(matricula)] = Aluno(**dados)
         self.trilha()
         print("Dados carregados com sucesso.")
 
+    # Método para salvar os alunos no arquivo JSON
     def salvar_alunos_arquivo(self):
         with open("dados_alunos.json", "w") as arquivo_json:
-            alunos_dict = {
+            alunos_dicionario = {
                 matricula: aluno.__dict__
                 for matricula, aluno in self.alunos.items()
             }
-            json.dump(alunos_dict, arquivo_json)
+            json.dump(alunos_dicionario, arquivo_json)
         self.trilha()
         print("Dados dos alunos salvos com sucesso.")
 
-
+# Função principal do programa
 def main():
     gerenciador = GerenciadorAlunos()
 
@@ -222,6 +227,7 @@ def main():
         try:
             opcao = int(input("Escolha uma opção: "))
 
+            # Tratamento de erros
             if opcao < 0 or opcao > 7:
                 print("-\nOpção inválida. Tente novamente.\n-")
                 continue
