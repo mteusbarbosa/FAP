@@ -45,22 +45,6 @@ class Aluno:
         self.nota2 = nota2
         self.nota3 = nota3
 
-    def atualizar_nota(self, nome_nota, nota_atual):
-        while True:
-            try:
-                nova_nota = input(f"Nota do {nome_nota} atual ({nota_atual}): ")
-                if nova_nota:
-                    nova_nota = float(nova_nota)
-                    if nova_nota < 0 or nova_nota > 10:
-                        print("A nota deve estar entre 0 e 10.")
-                        continue
-                    return nova_nota
-                else:
-                    return nota_atual
-            except ValueError:
-                print("Valor inválido. A nota deve ser um número real.")
-                continue
-
     def obter_nota(self, nome_nota, nota_atual=None):
         while True:
             try:
@@ -156,14 +140,12 @@ class GerenciadorAlunos:
                 if novo_curso:
                     aluno.curso = novo_curso
 
-                aluno.nota1 = aluno.atualizar_nota("1º Trimestre", aluno.nota1)
-                aluno.nota2 = aluno.atualizar_nota("2º Trimestre", aluno.nota2)
-                aluno.nota3 = aluno.atualizar_nota("3º Trimestre", aluno.nota3)
+                aluno.nota1 = aluno.obter_nota("1º Trimestre", aluno.nota1)
+                aluno.nota2 = aluno.obter_nota("2º Trimestre", aluno.nota2)
+                aluno.nota3 = aluno.obter_nota("3º Trimestre", aluno.nota3)
 
                 self.alunos[matricula] = aluno
-                print(
-                    f"Informações do aluno {aluno.nome} atualizadas com sucesso!"
-                )
+                print(f"Informações do aluno {aluno.nome} atualizadas com sucesso!")
                 break
             else:
                 print("Matrícula não encontrada.")
