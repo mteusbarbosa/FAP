@@ -3,34 +3,11 @@ import mysql.connector
 
 def conectar_banco():
     return mysql.connector.connect(
-        host="localhost",
-        user="root", # Usuário do Banco de Dados
+        host="" # Caminho para o host do servidor,
+        user="", # Usuário do Banco de Dados
         password="", # Senha do Banco de Dados
         database="banco_fap" # Nome do Banco
     )
-    
-""" Criar as tabelas no banco 
-CREATE DATABASE banco_fap
-
-USE banco_fap;
-
-CREATE TABLE contas (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(255),
-    numero_conta VARCHAR(50) UNIQUE,
-    data_criacao DATE,
-    tipo_conta VARCHAR(50),
-    saldo DECIMAL(10, 2) DEFAULT 0.0
-);
-
-CREATE TABLE transacoes (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    conta_id INT,
-    tipo VARCHAR(50),
-    valor DECIMAL(10, 2),
-    FOREIGN KEY (conta_id) REFERENCES contas(id)
-); """
-
 
 
 class Conta:
