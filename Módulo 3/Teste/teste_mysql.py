@@ -6,10 +6,13 @@ def conectar_banco():
         host="localhost",
         user="root", # Usuário do Banco de Dados
         password="", # Senha do Banco de Dados
-        database="" # Nome do Banco
+        database="banco_fap" # Nome do Banco
     )
     
 """ Criar as tabelas no banco 
+CREATE DATABASE banco_fap
+
+USE banco_fap;
 
 CREATE TABLE contas (
     id INT AUTO_INCREMENT PRIMARY KEY,
