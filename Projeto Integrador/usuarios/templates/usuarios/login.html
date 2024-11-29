@@ -1,0 +1,79 @@
+{% extends 'usuarios/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="body">
+    <div class="container">
+        <div class="esquerda">
+            <div class="circulo-azul"></div>
+            <div class="circulo-aqua"></div>
+
+            <div class="textoSuperiorEsquerda">
+                <b>
+                    BEM - VINDO (A) <br />
+                    AO <div class="PGVD">GPVD</div>
+                </b>
+            </div>
+
+            <form method="post" class="formulario" autocomplete="off">
+                {% csrf_token %}
+
+                <div>
+                    {{ form.email.label_tag }}
+                    <div class="input-container">
+                        {{ form.email }}
+                    </div>
+                </div>
+
+                <div>
+                    {{ form.senha.label_tag }}
+                    <div class="input-container">
+                        {{ form.senha }}
+                        <i class="fas fa-eye toggle-password" onclick="togglePasswordVisibility()"></i>
+                    </div>
+                </div>
+
+                {% if messages %}
+                {% for message in messages %}
+                <div class="mensagem-erro-index">{{ message }}</div>
+                {% endfor %}
+                {% endif %}
+
+                <div class="lembrar">
+                    <label>
+                        <input type="checkbox">
+                        Lembrar-me
+                    </label>
+                    <a href="{% url 'usuarios:recuperar_senha' %}">
+                        Esqueci minha senha
+                    </a>
+                </div>
+
+                <button type="submit" class="btn" style="background-color: #0000FF;">
+                    Entrar
+                </button>
+
+                <div class="login-register">
+                    <p>
+                        Não possui conta?
+                        <a href="{% url 'usuarios:cadastro' %}">
+                            Cadastre-se
+                        </a>
+                    </p>
+                </div>
+            </form>
+        </div>
+
+        <div class="direita">
+            <p class="textoSuperiorDireita">
+                Gerenciamento <br />
+                processual <br />
+                de violência doméstica.
+            </p>
+
+            <img class="figura" src="{% static 'img/PGVD-removebg-preview.png' %}" alt="figura">
+            <img class="figura2" src="{% static 'img/PGVD__1_-removebg-preview.png' %}" alt="figura2">
+        </div>
+    </div>
+</div>
+{% endblock %}

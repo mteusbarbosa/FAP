@@ -1,0 +1,30 @@
+{% extends 'usuarios/base.html' %}
+{% load static %}
+
+{% block title %}Cadastro de Usuário{% endblock %}
+
+{% block content %}
+<header>
+    <h1>Nova Credencial</h1>
+    <link rel="stylesheet" href="{% static 'css/telaCadastroUser.css' %}">
+</header>
+<div class="wrapper">
+    <div class="aviso">
+        1. Informe seu primeiro nome, o seu CPF e a sua data de nascimento
+    </div>
+    <form method="post" action="{% url 'usuarios:cadastro' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="buttons-cadastro">
+            <div class="back-button-cadastro">
+                <a href="/">
+                    <button type="button" class="botao" style="background-color: aqua;">Voltar</button>
+                </a>
+            </div>
+            <div class="continue-button-cadastro">
+                <button type="submit" class="botao" style="background-color: #0000FF;">Continuar</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

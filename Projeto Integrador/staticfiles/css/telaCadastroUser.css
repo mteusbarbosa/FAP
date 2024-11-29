@@ -1,0 +1,260 @@
+
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+/* 
+body{
+     display: flex; 
+     justify-content: center;
+    align-items: center; 
+     background-size: cover; 
+     background-position: center; 
+    background-color: #F6FEFF;
+   
+    
+} */
+
+ header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 100px;
+    background: transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99;
+} 
+
+.marca{
+    font-size: 2em;
+    color: rgb(4, 4, 104);
+    -webkit-user-select: none;
+       -moz-user-select: none;
+            user-select: none;
+}
+
+.navegacao a {
+    position: relative;
+    font-size: 1.1em;
+    color: rgb(4, 4, 104);
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 20px;
+}
+
+.navegacao a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 3px;
+    background: rgb(4, 4, 104);
+    border-radius: 5px;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .5s;
+}
+
+.navegacao a:hover::after {
+    transform-origin: left;
+    transform: scaleX(1);
+
+}
+
+.cadastro{
+
+    margin-top: 140px;
+    position: relative;
+    width: 400px;
+    height: 440px;
+    background-color: white;
+    border: none;
+    border-radius: none;
+    box-shadow:none;
+    display: flex;
+    
+}
+
+ .wrapper {
+    margin-top: 180px;
+    position: relative;
+    width: 300px;
+    height: 400px;
+    /* background-color: white;
+    border: 2px solid white; */
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+    /* box-shadow: 0 0 30px black;  */
+    left: 158px;
+} 
+
+.wrapper .formm-box {
+    width: 100%;
+    padding: 40px;
+}
+
+.formm-box h2{
+    font-size: 2em;
+    color: rgb(4, 4, 104);
+    text-align: center;
+}
+
+.input-box {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 40px;
+    border-bottom: none;
+    margin: 15px 0;
+    bottom: 10px;
+    align-items: center;
+    justify-content: left;
+    padding-left: 10px; /* Adiciona margem apenas no lado esquerdo */
+    background: #ECECEC;
+    border: 2px solid #ECECEC;
+    border-radius: 3px;
+
+}
+
+.input-box .label{
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50);
+    font-size: 1em;
+    color: black;
+    font-weight: 500;
+    pointer-events: none;
+    transition: 0.3s;
+}
+
+.input-box input:focus~label,
+.input-box input:valid~label {
+    top: 5px;
+}
+
+.input-box .input{
+    width: 100%;
+    height: 100%;
+    background: white;
+    border: 2px solid gray;
+    border-radius: 10px;
+    font-size: 14px;
+    color: rgb(43, 41, 41);
+    font-weight: 600;
+    padding: 0 35px o 5px;
+    
+}
+.input-container {
+    position: relative;
+  }
+  
+  .input-container .fa {
+    position: absolute;
+    right: 10px;
+    top: 30%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #cbc9c9;
+  }
+  
+  .input-container .fa:hover {
+    color: #333;
+  }
+  
+
+.lembrar {
+    font-size: .9em;
+    color: rgb(4, 4, 104);
+    font-weight: 500;
+    margin: -14px 0 15px;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.lembrar label input{
+    accent-color: blue ;
+    margin-right: 3px;
+}
+
+.lembrar a:hover{
+text-decoration: underline;
+}
+
+.btn{
+    width:100%;
+    height: 45px;
+    background-color: rgb(4, 4, 104);
+    border:none;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    color: white;
+    font-weight: 500;
+}
+
+.bg-green {
+    background-color: green; 
+}
+
+.login-register {
+  font-size: .9em;
+  color: rgb(4, 4, 104);
+  text-align: center;
+  font-weight: 500;
+  margin: 25px 0 35px; 
+}
+
+
+.login-register p a{
+    color: rgb(4, 4, 104);
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 3px;
+}
+
+.login-register p a:hover{
+    text-decoration: underline;
+}
+.entrada-label {
+    position: relative;
+    align-self: center;
+    color: black;
+    left: 45%;
+    font-size: 13px;
+  }
+.entrada-label-cadastro{
+
+    position: relative;
+    align-self: center;
+    color: black;
+    left: 0%;
+    font-size: 13px;
+}
+
+.mensagem-erro {
+    color: red; 
+    justify-content: center;
+    margin-top: 2px; 
+    margin-bottom: 9px; 
+  }
+
+.mensagem-erro-index {
+    color: red; 
+    position: absolute;
+    justify-content: center;
+    margin-top: 38%; 
+    margin-left: 160px;
+  }
+/*# 
